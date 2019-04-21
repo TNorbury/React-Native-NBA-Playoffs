@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from 'react';
-import { Text, View, ActivityIndicator } from 'react-native';
+import { Text, View, ActivityIndicator, ScrollView } from 'react-native';
 import { Header } from 'react-native-elements';
 
 import Round from './Round';
@@ -40,34 +40,31 @@ export default class App extends Component {
 
         return (
             <View>
-                <Header
-                    centerComponent={{
-                        text: 'NBA Playoffs',
-                        style: {
-                            color: 'white',
-                            fontSize: 25,
-                            marginBottom: 10,
-                        },
-                    }}
-                    backgroundColor={'#1D428A'}
-                    containerStyle={{
-                        height: 50,
-                    }}
-                />
+                <ScrollView>
+                    <Header
+                        centerComponent={{
+                            text: 'NBA Playoffs',
+                            style: {
+                                color: 'white',
+                                fontSize: 25,
+                                marginBottom: 10,
+                            },
+                        }}
+                        backgroundColor={'#1D428A'}
+                        containerStyle={{
+                            height: 50,
+                        }}
+                    />
+                    <Round
+                        roundName="Western Conference Round 1"
+                        series={this.state.data.series.slice(0, 4)}
+                    />
 
-                <Round
-                    roundName="Western Conference Round 1"
-                    series={this.state.data.series.slice(0, 4)}
-                />
-
-                <Round
-                    roundName="Eastern Conference Round 1"
-                    series={this.state.data.series.slice(4, 8)}
-                />
-
-                {/* {this.state.data.series.map(series => {
-                    return <Text>{series.summaryStatusText}</Text>;
-                })} */}
+                    <Round
+                        roundName="Eastern Conference Round 1"
+                        series={this.state.data.series.slice(4, 8)}
+                    />
+                </ScrollView>
             </View>
         );
     }

@@ -6,6 +6,8 @@
 import React, { Component } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 
+import { styles } from '../style/styles';
+
 export default class Series extends Component {
     /**
      * Props:
@@ -67,20 +69,14 @@ export default class Series extends Component {
     }
 
     render() {
-        if (!this.state.topLoaded && !this.state.bottomLoaded) {
-            return (
-                <View>
-                    <ActivityIndicator />
-                </View>
-            );
-        }
-
         return (
-            <View>
-                <Text>
+            <View
+                style={styles.seriesContainer}
+            >
+                <Text style={styles.teamName}>
                     {this.state.topTeam} vs {this.state.bottomTeam}
                 </Text>
-                <Text>
+                <Text style={styles.seriesScore}>
                     {this.props.series.topRow.wins}-
                     {this.props.series.bottomRow.wins}
                 </Text>
