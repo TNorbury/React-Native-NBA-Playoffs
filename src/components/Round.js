@@ -8,6 +8,7 @@ import { View } from 'react-native';
 import { Text } from 'react-native-elements';
 
 import Series from './Series';
+import { styles } from '../style/styles';
 
 export default class Round extends Component {
     /**
@@ -21,21 +22,29 @@ export default class Round extends Component {
     }
 
     render() {
+        var activeSeries = false;
+
+        // First determine if this round has started yet by seeing if any of the series
+        // have been scheduled
+        this.props.series.forEach(series => {
+            if (series.isScheduleAvailable) {
+                activeSeries = true;
+                return;
+            }
+        });
+
         return (
-            // We'll iterate over the games of this round, displaying the current results
-            <View>
-                <Text h4 style={{ color: 'black', justifyContent: 'center' }}>
-                    {this.props.roundName}
-                </Text>
-                {this.props.series.map(series => {
-                    return (
-                        // <Text style={{ color: 'black' }}>
-                        //     {series.summaryStatusText}
-                        // </Text>
-                        <Series series={series} />
-                    );
-                })}
-            </View>
+            activeSeries && (
+                // We'll iterate over the games of this round, displaying the current results
+                <View style={styles.roundContainer}>
+                    <Text h4 style={{ color: 'black', textAlign: 'center' }}>
+                        {this.props.roundName}
+                    </Text>
+                    {this.props.series.map(series => {
+                        return <Series series={series} />;
+                    })}
+                </View>
+            )
         );
     }
 }

@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from 'react';
-import { Text, View, ActivityIndicator, ScrollView } from 'react-native';
+import { View, ActivityIndicator, ScrollView } from 'react-native';
 import { Header } from 'react-native-elements';
 
 import Round from './Round';
@@ -55,6 +55,7 @@ export default class App extends Component {
                             height: 50,
                         }}
                     />
+
                     <Round
                         roundName="Western Conference Round 1"
                         series={this.state.data.series.slice(0, 4)}
@@ -63,6 +64,31 @@ export default class App extends Component {
                     <Round
                         roundName="Eastern Conference Round 1"
                         series={this.state.data.series.slice(4, 8)}
+                    />
+
+                    <Round
+                        roundName="Western Conference Semi-Finals"
+                        series={this.state.data.series.slice(8, 10)}
+                    />
+
+                    <Round
+                        roundName="Eastern Conference Semi-Finals"
+                        series={this.state.data.series.slice(10, 12)}
+                    />
+
+                    <Round
+                        roundName="Western Conference Finals"
+                        series={this.state.data.series.slice(12, 13)}
+                    />
+
+                    <Round
+                        roundName="Eastern Conference Fianls"
+                        series={this.state.data.series.slice(13, 14)}
+                    />
+
+                    <Round
+                        roundName="NBA Finals"
+                        series={this.state.data.series.slice(14, 15)}
                     />
                 </ScrollView>
             </View>

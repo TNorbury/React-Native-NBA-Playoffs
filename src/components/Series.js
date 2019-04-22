@@ -20,8 +20,6 @@ export default class Series extends Component {
         this.state = {
             topTeam: 'Team 1',
             bottomTeam: 'Team 2',
-            topLoaded: false,
-            bottomLoaded: false,
         };
     }
 
@@ -59,8 +57,6 @@ export default class Series extends Component {
                 this.setState({
                     topTeam: isTop ? teamName : this.state.topTeam,
                     bottomTeam: isTop ? this.state.bottomTeam : teamName,
-                    topLoaded: isTop ? true : this.state.topLoaded,
-                    bottomLoaded: isTop ? this.state.bottomLoaded : true,
                 });
             })
             .catch(error => {
@@ -70,14 +66,12 @@ export default class Series extends Component {
 
     render() {
         return (
-            <View
-                style={styles.seriesContainer}
-            >
+            <View style={styles.seriesContainer}>
                 <Text style={styles.teamName}>
                     {this.state.topTeam} vs {this.state.bottomTeam}
                 </Text>
                 <Text style={styles.seriesScore}>
-                    {this.props.series.topRow.wins}-
+                    {this.props.series.topRow.wins} -{' '}
                     {this.props.series.bottomRow.wins}
                 </Text>
             </View>

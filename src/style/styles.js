@@ -15,8 +15,11 @@ export const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         borderColor: 'black',
         borderWidth: 2,
-        marginEnd: 20,
-        marginStart: 20,
+        borderRadius: 10,
         marginBottom: 5,
+        width: 350,
     },
+    roundContainer: {
+        alignItems: "center"
+    }
 });
