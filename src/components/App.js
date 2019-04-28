@@ -3,19 +3,28 @@
  */
 
 import React, { Component } from 'react';
-import { View, ActivityIndicator, ScrollView } from 'react-native';
+import {
+    View,
+    ActivityIndicator,
+    ScrollView,
+    RefreshControl,
+} from 'react-native';
 import { Header } from 'react-native-elements';
+import { styles } from '../style/styles';
 
 import Round from './Round';
 
 export default class App extends Component {
     constructor(props) {
         super(props);
-        this.state = { isLoading: true };
+        this.state = { isLoading: true, refreshing: false };
     }
 
     componentDidMount() {
-        // We want to start off by getting the current playoff situation from the NBA
+        this.getPlayoffGames();
+    }
+
+    getPlayoffGames() {
         return fetch('https://data.nba.net/prod/v1/2018/playoffsBracket.json')
             .then(response => response.json())
             .then(responseJson => {
@@ -29,6 +38,13 @@ export default class App extends Component {
             });
     }
 
+    _onRefresh() {
+        this.setState({ refreshing: true });
+        this.getPlayoffGames().then(() => {
+            this.setState({ refreshing: false });
+        });
+    }
+
     render() {
         if (this.state.isLoading) {
             return (
@@ -37,23 +53,26 @@ export default class App extends Component {
                 </View>
             );
         }
-
         return (
             <View>
-                <ScrollView>
+                <ScrollView
+                    stickyHeaderIndices={[0]}
+                    style={{ backgroundColor: '#ffffff' }}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.refreshing}
+                            onRefresh={this._onRefresh.bind(this)}
+                            title={"Refreshing..."}
+                        />
+                    }
+                >
                     <Header
                         centerComponent={{
                             text: 'NBA Playoffs',
-                            style: {
-                                color: 'white',
-                                fontSize: 25,
-                                marginBottom: 10,
-                            },
+                            style: styles.headerText,
                         }}
                         backgroundColor={'#1D428A'}
-                        containerStyle={{
-                            height: 50,
-                        }}
+                        containerStyle={styles.headerBar}
                     />
 
                     <Round

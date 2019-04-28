@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
     seriesScore: {
         textAlign: 'center',
         fontSize: 15,
+        color: 'black',
     },
     seriesContainer: {
         flex: 1,
@@ -18,8 +19,18 @@ export const styles = StyleSheet.create({
         borderRadius: 10,
         marginBottom: 5,
         width: 350,
+        backgroundColor: '#eeeeee',
     },
     roundContainer: {
-        alignItems: "center"
-    }
+        alignItems: 'center',
+    },
+    headerBar: {
+        height: 50,
+        elevation: 10,
+    },
+    headerText: {
+        color: 'white',
+        fontSize: 25,
+        marginBottom: 20,
+    },
 });

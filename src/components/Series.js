@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 
 import { styles } from '../style/styles';
+import Storage from '../util/Storage.js';
 
 export default class Series extends Component {
     /**
@@ -20,6 +21,9 @@ export default class Series extends Component {
         this.state = {
             topTeam: 'Team 1',
             bottomTeam: 'Team 2',
+
+            // We'll use this storage class to access the async storage
+            storage: new Storage(),
         };
     }
 
@@ -30,9 +34,27 @@ export default class Series extends Component {
     }
 
     getTeamName(teamId, isTop) {
+        // First, we'll see if we have this team saved locally
+
+        this.state.storage.getTeam(teamId).then(teamName => {
+            if (teamName == 'none') {
+                this.getTeamNameFromServer(teamId, isTop);
+            }
+
+            // Otherwise, if the name is good, just update state
+            else {
+                // console.log(teamName);
+                this.setState({
+                    topTeam: isTop ? teamName : this.state.topTeam,
+                    bottomTeam: isTop ? this.state.bottomTeam : teamName,
+                });
+            }
+        });
+    }
+
+    getTeamNameFromServer(teamId, isTop) {
         var requestUrl =
             'https://stats.nba.com/stats/teamdetails?TeamID=' + teamId;
-        //console.log(requestUrl);
         fetch(requestUrl, {
             method: 'GET',
             headers: {
@@ -48,10 +70,13 @@ export default class Series extends Component {
             .then(response => response.json())
             .then(responseJson => {
                 // The team name will be the city followed by the nick name
-                var teamName =
+                teamName =
                     responseJson.resultSets[0].rowSet[0][4] +
                     ' ' +
                     responseJson.resultSets[0].rowSet[0][2];
+
+                // Since we got the team name, save it in local storage
+                this.state.storage.saveTeam(teamId, teamName);
 
                 // Update the state with the name name
                 this.setState({

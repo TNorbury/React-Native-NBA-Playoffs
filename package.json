@@ -1,5 +1,5 @@
 {
-  "name": "NBA Playoffs",
+  "name": "NBAPlayoffs",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,6 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.3.3",
     "react": "16.8.3",
     "react-native": "0.59.5",
     "react-native-elements": "^1.1.0",
