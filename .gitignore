@@ -57,3 +57,6 @@ buck-out/
 
 
 android/.project
+
+# ignore this so our secret key isn't public
+android/gradle.properties
