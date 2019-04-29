@@ -1,6 +1,12 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
 export default class Storage {
+    constructor() {
+        // For whatever reason, this team never gets retrieved from the server right away, 
+        // so I'm just setting it manually here for now
+        this.saveTeam('1610612753', 'Orlando Magic');
+    }
+
     /**
      *
      * @param {string} teamId The id of the team we're storing

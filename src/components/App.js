@@ -7,7 +7,6 @@ import {
     View,
     ActivityIndicator,
     ScrollView,
-    RefreshControl,
 } from 'react-native';
 import { Header } from 'react-native-elements';
 import { styles } from '../style/styles';
@@ -38,13 +37,6 @@ export default class App extends Component {
             });
     }
 
-    _onRefresh() {
-        this.setState({ refreshing: true });
-        this.getPlayoffGames().then(() => {
-            this.setState({ refreshing: false });
-        });
-    }
-
     render() {
         if (this.state.isLoading) {
             return (
@@ -58,13 +50,6 @@ export default class App extends Component {
                 <ScrollView
                     stickyHeaderIndices={[0]}
                     style={{ backgroundColor: '#ffffff' }}
-                    refreshControl={
-                        <RefreshControl
-                            refreshing={this.state.refreshing}
-                            onRefresh={this._onRefresh.bind(this)}
-                            title={"Refreshing..."}
-                        />
-                    }
                 >
                     <Header
                         centerComponent={{

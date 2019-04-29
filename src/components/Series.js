@@ -4,7 +4,7 @@
  */
 
 import React, { Component } from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text } from 'react-native';
 
 import { styles } from '../style/styles';
 import Storage from '../util/Storage.js';
@@ -48,6 +48,7 @@ export default class Series extends Component {
                     topTeam: isTop ? teamName : this.state.topTeam,
                     bottomTeam: isTop ? this.state.bottomTeam : teamName,
                 });
+                this.forceUpdate();
             }
         });
     }
