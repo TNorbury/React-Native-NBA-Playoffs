@@ -60,3 +60,8 @@ android/.project
 
 # ignore this so our secret key isn't public
 android/gradle.properties
+
+playstore_images
+android/icon/*
+android/app/release/app.aab
+private_key.pepk
