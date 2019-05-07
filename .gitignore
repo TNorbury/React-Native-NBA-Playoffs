@@ -65,3 +65,5 @@ playstore_images
 android/icon/*
 android/app/release/app.aab
 private_key.pepk
+
+icon/*
